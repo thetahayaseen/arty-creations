@@ -1,7 +1,7 @@
 <nav class="bg-stone-50 border-b border-stone-100 shadow-sm">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 
-    <a href="#" class="flex items-center space-x-3 group">
+    <a href="{{ route('home')  }}" class="flex items-center space-x-3 group">
       <span class="self-center font-display font-bold text-2xl whitespace-nowrap text-stone-600 transition-colors duration-200 group-hover:text-stone-700">
         Arty Creations
       </span>
@@ -22,7 +22,7 @@
     <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1" id="navbar-cta">
       <ul class="flex flex-col font-medium p-4 lg:p-0 mt-4 border border-stone-200 rounded-lg bg-stone-50 lg:space-x-8 lg:flex-row lg:mt-0 lg:border-0 lg:bg-transparent">
         <li>
-          <a href="#" class="block py-2 px-3 lg:p-0 text-stone-600 font-semibold text-lg hover:text-stone-500 hover:bg-stone-200 lg:hover:bg-transparent transition duration-200">Home</a>
+          <a href="{{ route('home')  }}" class="block py-2 px-3 lg:p-0 text-stone-600 font-semibold text-lg hover:text-stone-500 hover:bg-stone-200 lg:hover:bg-transparent transition duration-200">Home</a>
         </li>
         <li>
           <a href="#" class="block py-2 px-3 lg:p-0 text-stone-600 font-semibold text-lg hover:text-stone-500 hover:bg-stone-200 lg:hover:bg-transparent transition duration-200">About</a>
@@ -33,12 +33,22 @@
         <li>
           <a href="#" class="block py-2 px-3 lg:p-0 text-stone-600 font-semibold text-lg hover:text-stone-500 hover:bg-stone-200 lg:hover:bg-transparent transition duration-200">Contact</a>
         </li>
+        
+
         <li class="hidden lg:block">
           <p class="block py-2 px-3 lg:p-0 text-stone-600 font-semibold text-lg lg:hover:bg-trans5arent transition duration-200"> | </p>
         </li>
-        <li>
-          <a href="#" class="block py-2 px-3 lg:p-0 text-stone-600 font-semibold text-lg hover:text-stone-500 hover:bg-stone-200 lg:hover:bg-transparent transition duration-200">Login</a>
-        </li>
+
+        @auth          
+          <li>
+            <a href="{{ route('auth.logout')  }}" class="block py-2 px-3 lg:p-0 text-stone-600 font-semibold text-lg hover:text-stone-500 hover:bg-stone-200 lg:hover:bg-transparent transition duration-200">Logout</a>
+          </li>
+        @else
+          <li>
+            <a href="{{ route('auth.login')  }}" class="block py-2 px-3 lg:p-0 text-stone-600 font-semibold text-lg hover:text-stone-500 hover:bg-stone-200 lg:hover:bg-transparent transition duration-200">Login</a>
+          </li>
+        @endauth
+
       </ul>
     </div>
   </div>
