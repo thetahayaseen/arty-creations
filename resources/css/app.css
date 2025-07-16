@@ -3,4 +3,14 @@
 @theme {
     --font-display: "Space Grotesk", "sans-serif";
     --font-body: "Poppins", "sans-serif";
+
+    --breakpoint-mobile-nav-sm: 22.625rem;
+    --breakpoint-mobile-nav-md: 27.5rem;
+    --breakpoint-mobile-form-sm: 34.375rem;
+}
+
+@layer utilities {
+    ::placeholder {
+        @apply text-stone-400;
+    }
 }

@@ -7,8 +7,7 @@ use Auth;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 
-use App\Http\Requests\RegisterRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\Auth\RegisterRequest;
 
 class RegisterController extends Controller
 {
