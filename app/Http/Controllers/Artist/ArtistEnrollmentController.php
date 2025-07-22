@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Artist;
 
+use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Artist\ArtistEnrollmentRequest;
 use App\Models\Artist\ArtistEnrollment;
@@ -9,16 +10,14 @@ use App\Models\Artist\ArtistEnrollment;
 class ArtistEnrollmentController extends Controller
 {
     public function apply(){
+
         if(!auth()->check()){
             return redirect()->route("auth.login")->withErrors([
                 "password" => "You need to login first, before you request to enroll yourself as an artist."
             ]);
         }
-
-        $userId = auth()->id();
-        $enrollment = ArtistEnrollment::where("user_id", $userId)->first();
         
-        if($enrollment){
+        if(auth()->user()->role == UserRole::ARTIST){
             return redirect()->route("artist.enrollment.message");
         }
 
@@ -34,11 +33,15 @@ class ArtistEnrollmentController extends Controller
         $enrollment = ArtistEnrollment::create($data);
 
         if($enrollment){
+            $user = auth()->user();
+            $user->role = UserRole::ARTIST;
+            $user->save();
+
             return redirect()->route("artist.enrollment.message");
         }
 
        return back()->withErrors([
-        "general" => "Soemthing went wrong while submitting your request. Please try again or contact us for support."
+        "general" => "Something went wrong while submitting your request. Please try again or contact us for support."
        ])->withInput(); 
                         
     }

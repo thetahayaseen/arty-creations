@@ -24,7 +24,7 @@ Route::prefix("auth")->name("auth.")->group(function(){
 
 Route::prefix("artist")->name("artist.")->group(function(){
     
-    Route::get("enrollment", [ArtistEnrollmentController::class, "apply"])->name("enrollment");
+    Route::get("enrollment", [ArtistEnrollmentController::class, "apply"])->name("enrollment.form");
     Route::post("enrollment", [ArtistEnrollmentController::class, "submitRequest"])->name("enrollment.submit");
 
     Route::get("enrollment/terms", [ArtistEnrollmentController::class, "enrollmentTerms"])->name("enrollment.terms");

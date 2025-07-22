@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Artist\ArtistEnrollment;
+use App\Enums\UserRole;
 use Illuminate\Support\ServiceProvider;
 
 class ViewServiceProvider extends ServiceProvider
@@ -10,13 +10,8 @@ class ViewServiceProvider extends ServiceProvider
     public function boot(): void
     {
         view()->composer("partials.navigation", function ($view){
-            $hasEnrollment = false;
             $user = auth()->user();
-            
-            if($user){
-                $hasEnrollment = ArtistEnrollment::where("user_id", $user->id)->exists();
-            }
-
+            $hasEnrollment = $user && $user->role === UserRole::ARTIST;
             return $view->with("hasEnrollment", $hasEnrollment);
         });
     }
